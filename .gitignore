@@ -5,3 +5,6 @@
 /devkit/linux/libfrida-core.a
 /devkit/windows/frida-core.h
 /__pycache__
+*.swp
+builds
+build_linux
