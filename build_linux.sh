@@ -1,13 +1,16 @@
 #!/bin/bash
 #git pull
 #this version copied from upstream
-#python3 pre_linux.py
+python3 pre_linux.py
 set -e
-TARGET=linux-x86_64
-CURRDIR=$PWD
-FRIDA_SRC=${FRIDA_SRC:-~/github/frida}
-(cd $FRIDA_SRC/releng; python3 devkit.py frida-core $TARGET $CURRDIR/devkit/linux)
-(cd devkit/linux; python3 build_linux_map.py)
+
+scratch() {
+	TARGET=linux-x86_64
+	CURRDIR=$PWD
+	FRIDA_SRC=${FRIDA_SRC:-~/github/frida}
+	(cd $FRIDA_SRC/releng; python3 devkit.py frida-core $TARGET $CURRDIR/devkit/linux)
+	(cd devkit/linux; python3 build_linux_map.py)
+}
 
 mkdir -p build_linux
 (cd build_linux; cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" ..; make all)
